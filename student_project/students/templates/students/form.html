@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Information Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 650px; margin: 40px auto; }
+        h1 { color: #2c3e50; }
+        label { display: block; margin-top: 14px; font-weight: bold; }
+        input[type="text"], input[type="number"], select, textarea {
+            width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box;
+        }
+        .inline-label { display: inline; font-weight: normal; margin-right: 15px; }
+        .error-box {
+            background: #fdecea; color: #b71c1c;
+            border: 1px solid #f5c6cb; padding: 10px;
+            border-radius: 4px; margin-bottom: 15px;
+        }
+        button {
+            margin-top: 20px; padding: 10px 22px;
+            background: #2c3e50; color: white;
+            border: none; border-radius: 4px; cursor: pointer;
+        }
+        button:hover { background: #1a252f; }
+    </style>
+</head>
+<body>
+    <h1>Student Information</h1>
+
+    {# ---- Error messages ---- #}
+    {% if errors %}
+        <div class="error-box">
+            <strong>Please fix the following:</strong>
+            <ul>
+                {% for error in errors %}<li>{{ error }}</li>{% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <form method="post" action="{% url 'student_results' %}">
+        {% csrf_token %}
+
+        {# Text Box #}
+        <label for="student_name">Student Name:</label>
+        <input type="text" id="student_name" name="student_name"
+               value="{{ name|default:'' }}">
+
+        {# Text Box #}
+        <label for="student_id">Student ID:</label>
+        <input type="text" id="student_id" name="student_id"
+               value="{{ student_id|default:'' }}">
+
+        {# Drop-down List #}
+        <label for="major">Major:</label>
+        <select id="major" name="major">
+            <option value="Computer Science"       {% if major == "Computer Science" %}selected{% endif %}>Computer Science</option>
+            <option value="Information Technology" {% if major == "Information Technology" %}selected{% endif %}>Information Technology</option>
+            <option value="Business"               {% if major == "Business" %}selected{% endif %}>Business</option>
+            <option value="Engineering"            {% if major == "Engineering" %}selected{% endif %}>Engineering</option>
+            <option value="Mathematics"            {% if major == "Mathematics" %}selected{% endif %}>Mathematics</option>
+        </select>
+
+        {# Radio Buttons #}
+        <label>Class Standing:</label>
+        <label class="inline-label">
+            <input type="radio" name="standing" value="Freshman"
+                   {% if standing == "Freshman" %}checked{% endif %}> Freshman
+        </label>
+        <label class="inline-label">
+            <input type="radio" name="standing" value="Sophomore"
+                   {% if standing == "Sophomore" %}checked{% endif %}> Sophomore
+        </label>
+        <label class="inline-label">
+            <input type="radio" name="standing" value="Junior"
+                   {% if standing == "Junior" %}checked{% endif %}> Junior
+        </label>
+        <label class="inline-label">
+            <input type="radio" name="standing" value="Senior"
+                   {% if standing == "Senior" %}checked{% endif %}> Senior
+        </label>
+
+        {# Checkboxes #}
+        <label>Programming Languages Known:</label>
+        <label class="inline-label">
+            <input type="checkbox" name="languages" value="Python"
+                   {% if "Python" in languages %}checked{% endif %}> Python
+        </label>
+        <label class="inline-label">
+            <input type="checkbox" name="languages" value="Java"
+                   {% if "Java" in languages %}checked{% endif %}> Java
+        </label>
+        <label class="inline-label">
+            <input type="checkbox" name="languages" value="C++"
+                   {% if "C++" in languages %}checked{% endif %}> C++
+        </label>
+        <label class="inline-label">
+            <input type="checkbox" name="languages" value="JavaScript"
+                   {% if "JavaScript" in languages %}checked{% endif %}> JavaScript
+        </label>
+
+        {# Number Input #}
+        <label for="grad_year">Expected Graduation Year:</label>
+        <input type="number" id="grad_year" name="grad_year"
+               min="2024" max="2035" value="{{ grad_year|default:'' }}">
+
+        {# Multi-line Text Area #}
+        <label for="comments">Comments:</label>
+        <textarea id="comments" name="comments" rows="4">{{ comments|default:'' }}</textarea>
+
+        {# Submit Button #}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

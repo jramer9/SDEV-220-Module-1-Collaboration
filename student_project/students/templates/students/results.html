@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration Summary</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 650px; margin: 40px auto; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #2c3e50; padding-bottom: 8px; }
+        .summary { background: #f4f6f8; border-radius: 6px; padding: 20px; }
+        .row { margin: 10px 0; }
+        .label { font-weight: bold; display: inline-block; width: 210px; color: #34495e; }
+        .value { color: #2c3e50; }
+        .back-btn {
+            display: inline-block; margin-top: 20px; padding: 10px 22px;
+            background: #2c3e50; color: white; text-decoration: none;
+            border-radius: 4px;
+        }
+        .back-btn:hover { background: #1a252f; }
+    </style>
+</head>
+<body>
+    <h1>Student Registration Summary</h1>
+
+    <div class="summary">
+        <div class="row">
+            <span class="label">Student Name:</span>
+            <span class="value">{{ name }}</span>
+        </div>
+        <div class="row">
+            <span class="label">Student ID:</span>
+            <span class="value">{{ student_id }}</span>
+        </div>
+        <div class="row">
+            <span class="label">Major:</span>
+            <span class="value">{{ major }}</span>
+        </div>
+        <div class="row">
+            <span class="label">Class Standing:</span>
+            <span class="value">{{ standing }}</span>
+        </div>
+        <div class="row">
+            <span class="label">Programming Languages:</span>
+            <span class="value">
+                {% if languages %}{{ languages|join:", " }}{% else %}None selected{% endif %}
+            </span>
+        </div>
+        <div class="row">
+            <span class="label">Expected Graduation:</span>
+            <span class="value">{{ grad_year }}</span>
+        </div>
+        {% if comments %}
+        <div class="row">
+            <span class="label">Comments:</span>
+            <span class="value">{{ comments }}</span>
+        </div>
+        {% endif %}
+    </div>
+
+    <a href="{% url 'student_form' %}" class="back-btn">← Back to Form</a>
+</body>
+</html>
