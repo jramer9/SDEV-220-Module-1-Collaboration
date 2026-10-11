@@ -7,13 +7,6 @@ body {
     padding-left: 15px;
 }
 
-.page-header {
-    background-color: #C25100;
-    margin-top: 0;
-    margin-bottom: 40px;
-    padding: 20px 20px 20px 40px;
-}
-
 .page-header h1,
 .page-header h1 a,
 .page-header h1 a:visited,
@@ -43,13 +36,74 @@ h4 {
     width: 100%;
 }
 
-.top-menu,
-.top-menu:hover,
-.top-menu:visited {
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #C25100;
+}
+
+.header-container h1 {
+    margin: 0;
+}
+
+.header-container h1 a,
+.header-container h1 a:visited,
+.header-container h1 a:active {
     color: #ffffff;
-    float: right;
-    font-size: 26pt;
-    margin-right: 20px;
+    font-size: 36pt;
+    text-decoration: none;
+    font-family: 'Lobster', cursive;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 25px; /* Increase for spacing */
+    color: #ffffff;
+    font-family: 'Lobster', cursive;
+    font-size: 18pt; /* Bigger font */
+}
+
+.header-nav a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.header-nav svg {
+    width: 28px; /* Bigger icons */
+    height: 28px;
+    fill: #ffffff;
+    vertical-align: middle;
+}
+
+#logout {
+    font-family: 'Lobster', cursive;
+    font-size: 18pt;
+    margin: 0; /* Remove default paragraph spacing */
+    color: #ffffff;
+}
+
+.logout-form {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-family: 'Lobster', cursive;
+    font-size: 18pt;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.logout-btn:hover {
+    color: #ffd699;
 }
 
 .post {
@@ -77,4 +131,8 @@ h4 {
 .btn-secondary:hover {
     color: #FFFFFF;
     background-color: #C25100;
+}
+
+.comment {
+    margin: 20px 0px 20px 20px;
 }

@@ -7,19 +7,38 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext">
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     </head>
-<body>
+    <body>
     <header class="page-header">
-      <div class="container">
-          <h1><a href="/">Django Girls Blog</a></h1>
-      </div>
-    </header>
-    <main class="container">
-        <div class="row">
-            <div class="col">
-            {% block content %}
-            {% endblock %}
+        <div class="header-container">
+            <h1><a href="/">Django Girls Blog</a></h1>
+            <div class="header-nav">
+            {% if user.is_authenticated %}
+                <span>Hello {{ user.username }}</span>
+                <form method="POST" action="{% url 'logout' %}" class="logout-form">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn">(Log out)</button>
+                </form>
+                <a href="{% url 'post_new' %}" title="New Post">
+                    {% include './icons/file-earmark-plus.svg' %}
+                </a>
+                <a href="{% url 'post_draft_list' %}" title="Drafts">
+                    {% include './icons/pencil-square.svg' %}
+                </a>
+            {% else %}
+                <a href="{% url 'login' %}" title="Login">
+                    {% include './icons/lock-fill.svg' %}
+                </a>
+            {% endif %}
             </div>
         </div>
-    </main>
-</body>
+    </header>
+        <main class="content container">
+            <div class="row">
+                <div class="col">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </main>
+    </body>
 </html>
